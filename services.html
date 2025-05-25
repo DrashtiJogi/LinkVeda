@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    .toggle-right {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #003366;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 1100;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+      font-weight: bold;
+    }
+
+    .toggle-right:hover {
+      background-color: #f0f0f0;
+    }
+
+    .sidebar-right {
+      position: fixed;
+      top: 0;
+      right: -200px;
+      width: 200px;
+      height: 100%;
+      background-color: #006699;
+      padding: 20px 10px;
+      border-radius: 0 0 0 10px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar-right.open {
+      right: 0;
+    }
+
+    .sidebar-right a {
+      display: block;
+      margin: 12px 0;
+      padding: 10px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .sidebar-right a:hover,
+    .sidebar-right a.active {
+      background-color: #0077b3;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 80px auto 60px;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .section h1, .section h2 {
+      color: #003366;
+      margin-bottom: 25px;
+    }
+
+    .service-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .service-box {
+      flex: 1 1 250px;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      font-weight: 600;
+      color: #003366;
+      transition: transform 0.3s ease;
+      cursor: default;
+      min-width: 220px;
+    }
+
+    .service-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .service-box:nth-child(1) { background-color: #f0f9ff; }
+    .service-box:nth-child(2) { background-color: #e6fffa; }
+    .service-box:nth-child(3) { background-color: #fff5f5; }
+    .service-box:nth-child(4) { background-color: #fffbea; }
+    .service-box:nth-child(5) { background-color: #f9f0ff; }
+
+    .contact-btn {
+      margin-top: 20px;
+      background-color: #0088cc;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,136,204,0.5);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .contact-btn:hover {
+      background-color: #0077b3;
+    }
+
+    @media (max-width: 700px) {
+      .service-boxes {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .section {
+        margin: 60px 15px 40px;
+        padding: 30px 20px;
+      }
+
+      .service-box {
+        min-width: 100%;
+        padding: 20px 15px;
+      }
+
+      .toggle-right {
+        font-size: 28px;
+        padding: 12px 16px;
+        top: 15px;
+        right: 15px;
+      }
+
+      .contact-btn {
+        padding: 16px 30px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .section h1 {
+        font-size: 24px;
+      }
+
+      .section h2 {
+        font-size: 20px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        padding: 16px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toggle Button -->
+  <div class="toggle-right" id="toggle-right" title="Menu">☰</div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar-right" id="sidebar-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="our price.html">Our Prices</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <!-- Services Section -->
+  <section class="section">
+    <h1>Our Services</h1>
+    <div class="service-boxes">
+      <div class="service-box">
+        <h2>Web Design</h2>
+        <p>Creative and modern designs that captivate your audience.</p>
+      </div>
+      <div class="service-box">
+        <h2>SEO Optimization</h2>
+        <p>Improve your website ranking and increase organic traffic.</p>
+      </div>
+      <div class="service-box">
+        <h2>Web Development</h2>
+        <p>Robust and scalable web solutions with latest tech stacks.</p>
+      </div>
+      <div class="service-box">
+        <h2>Social Media Marketing</h2>
+        <p>Grow your brand presence across social platforms effectively.</p>
+      </div>
+      <div class="service-box" style="background-color: #fff0f5;">
+        <h2>WhatsApp App Marketing</h2>
+        <p>Effective marketing solutions via WhatsApp to boost your reach. Reach your audience where they are already.</p>
+      </div>
+     <div class="service-box" style="background-color: #e3f7fc;">
+
+        <h2>Content Creation</h2>
+        <p>Engaging content that resonates with your audience and drives results.</p>
+      </div>
+    </div>
+
+    <a href="contact.html" class="contact-btn">Contact Us</a>
+  </section>
+
+  <script>
+    const toggleRight = document.getElementById('toggle-right');
+    const sidebarRight = document.getElementById('sidebar-right');
+    toggleRight.addEventListener('click', () => {
+      sidebarRight.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      overflow-x: hidden;
+      color: #333;
+      padding: 10px; /* Add some padding so content isn't edge-to-edge on phone */
+    }
+    .toggle-right {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #003366;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 1100;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+      user-select: none;
+    }
+    .toggle-right:hover {
+      background-color: #f0f0f0;
+    }
+    .sidebar-right {
+      position: fixed;
+      top: 0;
+      right: -220px;
+      width: 220px;
+      max-width: 80vw; /* max width 80% viewport width on small phones */
+      height: 100%;
+      background-color: #006699;
+      padding: 20px 10px;
+      border-radius: 0 0 0 10px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    .sidebar-right.open {
+      right: 0;
+    }
+    .sidebar-right a {
+      display: block;
+      margin: 12px 0;
+      padding: 12px 10px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-align: center;
+      transition: background 0.3s;
+      font-size: 1rem;
+      user-select: none;
+    }
+    .sidebar-right a:hover {
+      background-color: #0077b3;
+    }
+    .sidebar-right a.active {
+      background-color: #005f8c;
+    }
+    .section {
+      max-width: 900px;
+      margin: 80px auto 60px;
+      padding: 40px 30px;
+      border-radius: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: 1s ease;
+    }
+    .section h2 {
+      font-size: 32px;
+      color: #003366;
+      margin-bottom: 25px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+    input, textarea {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      min-height: 44px;
+    }
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+    .form-btn {
+      background-color: #0077cc;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      min-height: 48px;
+    }
+    .form-btn:hover {
+      background-color: #005fa3;
+    }
+    .contact-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .contact-links a {
+      display: inline-block;
+      margin: 10px 8px;
+      padding: 12px 25px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+      font-size: 16px;
+      user-select: none;
+    }
+    .contact-links a.email-btn {
+      background-color: #0077cc;
+    }
+    .contact-links a:hover {
+      opacity: 0.9;
+    }
+    .map-container {
+      margin: 50px auto;
+      max-width: 900px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: #ffffff;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      border-radius: 15px;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+      }
+      .section {
+        margin: 30px 10px;
+        padding: 30px 20px;
+      }
+      .section h2 {
+        font-size: 26px;
+      }
+      form {
+        max-width: 100%;
+      }
+      input, textarea {
+        font-size: 14px;
+      }
+      .form-btn {
+        font-size: 14px;
+        padding: 12px;
+      }
+      .contact-links a {
+        font-size: 14px;
+        padding: 10px 18px;
+        margin: 8px 5px;
+      }
+      .map-container iframe {
+        height: 280px;
+      }
+      .sidebar-right {
+        width: 80vw;
+        right: -80vw;
+      }
+      .sidebar-right.open {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Toggle -->
+  <div class="toggle-right" id="toggle-right" title="Menu">☰</div>
+
+  <!-- Sidebar Menu -->
+  <nav class="sidebar-right" id="sidebar-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="our price.html">Our Prices</a>
+    <a href="contact.html" class="active">Contact Us</a>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="section fade-in">
+    <h2>📬 Contact Us</h2>
+    <p>We’d love to hear from you! Fill out the form or connect with us directly:</p>
+
+    <form action="mailto:info@linkveda.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="form-btn">Send Message</button>
+    </form>
+
+    <div class="contact-links">
+      <a href="https://wa.me/8160348803?text=Hello%20Linkveda%2C%20I%20want%20to%20connect!" target="_blank" rel="noopener noreferrer">💬 Chat on WhatsApp</a>
+      <a href="mailto:info@linkveda.com" class="email-btn">📧 Send Email</a>
+    </div>
+  </section>
+
+  <!-- Google Map Embed -->
+  <div class="map-container fade-in" style="max-width: 900px; margin-bottom: 50px;">
+    <h2 style="text-align: center; color: #003366; margin-bottom: 20px;">📍 Our Location</h2>
+    <iframe 
+      src="https://www.google.com/maps?q=115,%20V-1%20Ranchodray%20Nagar,%20Jagatpur,%20Chandlodiya%20Road,%20Ahmedabad&output=embed" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <script>
+    const toggleRight = document.getElementById('toggle-right');
+    const sidebarRight = document.getElementById('sidebar-right');
+    toggleRight.addEventListener('click', () => {
+      sidebarRight.classList.toggle('open');
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

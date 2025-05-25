@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    /* Toggle Menu Button (Top Right) */
+    .toggle-right {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #003366;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 1100;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+      user-select: none;
+    }
+
+    .toggle-right:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar-right {
+      position: fixed;
+      top: 0;
+      right: -220px;
+      width: 220px;
+      height: 100%;
+      background-color: #006699;
+      padding: 60px 10px 20px; /* top padding to avoid toggle button */
+      border-radius: 0 0 0 10px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    }
+
+    .sidebar-right.open {
+      right: 0;
+    }
+
+    .sidebar-right a {
+      display: block;
+      margin: 12px 0;
+      padding: 12px 10px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-align: center;
+      transition: background 0.3s;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .sidebar-right a:hover,
+    .sidebar-right a.active {
+      background-color: #005b99;
+    }
+
+    /* Animation Keyframes */
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-left, .animate-right, .animate-zoom {
+      opacity: 0;
+    }
+
+    .visible.animate-left {
+      animation: slideInLeft 1s forwards;
+    }
+
+    .visible.animate-right {
+      animation: slideInRight 1s forwards;
+    }
+
+    .visible.animate-zoom {
+      animation: zoomIn 1s forwards;
+    }
+
+    .about-section {
+      background-color: #ffffff;
+      max-width: 900px;
+      margin: 80px auto 60px;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .about-section h1 {
+      font-size: 36px;
+      color: #003366;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .what-drives-us {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 40px 20px;
+    }
+
+    .what-drives-us h2 {
+      text-align: center;
+      color: #005bbb;
+      margin-bottom: 40px;
+      font-size: 28px;
+    }
+
+    .drive-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 30px;
+    }
+
+    .drive-card {
+      flex: 1;
+      min-width: 250px;
+      max-width: 320px;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+
+    .drive-card .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #0077cc;
+    }
+
+    .drive-card h3 {
+      margin-bottom: 10px;
+      color: #003366;
+      font-size: 22px;
+    }
+
+    .drive-card p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 600px) {
+      .drive-cards {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px;
+      }
+
+      .about-section {
+        margin: 40px 15px 60px;
+        padding: 30px 20px;
+      }
+
+      .about-section h1 {
+        font-size: 28px;
+      }
+
+      .what-drives-us h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Toggle -->
+  <div class="toggle-right" id="toggle-right" title="Toggle Menu">☰</div>
+
+  <!-- Sidebar Menu -->
+  <nav class="sidebar-right" id="sidebar-right" role="navigation" aria-label="Main Navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active" aria-current="page">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="our price.html">Our Prices</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <!-- About Content -->
+  <section class="about-section animate-zoom" tabindex="0">
+    <h1>About LINKVEDA</h1>
+    <p>LINKVEDA Digital Marketing is driven by creativity and passion to deliver top-notch digital solutions to our clients.</p>
+    <p>Our team specializes in web design, development, SEO, and social media marketing to help your business grow online.</p>
+    <p>We believe in building strong partnerships and delivering exceptional results tailored to your unique needs.</p>
+  </section>
+
+  <!-- Vision, Mission, Price -->
+  <section class="what-drives-us">
+    <h2>🌟 What Drives Us</h2>
+    <div class="drive-cards">
+      <div class="drive-card animate-left" tabindex="0">
+        <div class="icon">👁️</div>
+        <h3>Our Vision</h3>
+        <p>To be a leading provider of innovative web solutions that empower businesses worldwide.</p>
+      </div>
+      <div class="drive-card animate-right" tabindex="0">
+        <div class="icon">🚀</div>
+        <h3>Our Mission</h3>
+        <p>To deliver high-quality, user-friendly, and result-driven web services to help our clients succeed online.</p>
+      </div>
+      <div class="drive-card animate-zoom" tabindex="0">
+        <div class="icon">💰</div>
+        <h3>Our Price</h3>
+        <p>Affordable and flexible pricing to fit your needs. Starting at just <strong>₹16,199</strong> for basic packages!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const toggleRight = document.getElementById('toggle-right');
+    const sidebarRight = document.getElementById('sidebar-right');
+
+    toggleRight.addEventListener('click', () => {
+      sidebarRight.classList.toggle('open');
+    });
+
+    // Close sidebar on clicking outside (optional, mobile UX)
+    document.addEventListener('click', (e) => {
+      if (!sidebarRight.contains(e.target) && !toggleRight.contains(e.target)) {
+        sidebarRight.classList.remove('open');
+      }
+    });
+
+    // Scroll animation observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.animate-left, .animate-right, .animate-zoom').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

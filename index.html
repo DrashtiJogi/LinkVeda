@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LINKVEDA Digital Marketing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      overflow-x: hidden;
+    }
+    .logo-container {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+    .toggle-right {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: #003366;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 1100;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+    }
+    .sidebar-right {
+      position: fixed;
+      top: 0;
+      right: -200px;
+      width: 200px;
+      height: 100%;
+      background-color: #006699;
+      padding: 20px 10px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+    .sidebar-right.open { right: 0; }
+    .sidebar-right a {
+      display: block;
+      margin: 12px 0;
+      padding: 10px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-align: center;
+    }
+    section {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      color: #003366;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    section p {
+      color: #444;
+      font-size: 16px;
+      text-align: center;
+    }
+    .vertical-gallery img {
+      width: 100%;
+      max-width: 400px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s ease, opacity 0.8s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      cursor: pointer;
+    }
+    .vertical-gallery img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stats h3 {
+      font-size: 36px;
+      text-align: center;
+      color: #333;
+      margin: 10px 0 5px;
+    }
+    .stats p {
+      text-align: center;
+      color: #555;
+    }
+    .stats img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+    .subscription-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .subscription-form input[type="email"] {
+      padding: 12px;
+      width: 70%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    .subscription-form button {
+      padding: 10px 20px;
+      background-color: #006699;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .subscription-form button:hover {
+      background-color: #005580;
+    }
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    /* Welcome popup */
+    #welcome-popup {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #006699;
+      color: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      z-index: 3000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    #welcome-popup button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: white;
+      color: #006699;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .vertical-gallery img { max-width: 90%; }
+      section { margin: 30px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar and Logo -->
+  <div class="toggle-right" id="toggle-right" title="Menu">☰</div>
+  <nav class="sidebar-right" id="sidebar-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="our price.html">Our Prices</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+  <div class="logo-container">LINKVEDA LINK UP LEVEL UP</div>
+
+<section class="fade-in">
+    <h2>Welcome to LINKVEDA</h2>
+    <p>We bring forth deep passion for creative problem solving with every one of our clients.</p>
+  </section>
+
+<!-- WhatsApp message button -->
+  <div style="position:fixed; bottom:20px; right:20px; z-index:2000;">
+    <a href="https://wa.me/8160348803?text=Hi%20I%20visited%20your%20website%20and%20would%20like%20to%20know%20more!" 
+       target="_blank" 
+       style="background:#25D366; color:white; padding:12px 20px; border-radius:50px; text-decoration:none; font-weight:bold;">
+      📩 Contact Us
+    </a>
+  </div>
+
+  <section class="fade-in">
+    <h2>Social Media Marketing</h2>
+    <div class="vertical-gallery">
+      <img src="image01.avif" alt="1" onclick="openLightbox(this.src)">
+      <img src="image02.avif" alt="2" onclick="openLightbox(this.src)">
+      <img src="image03.avif" alt="3" onclick="openLightbox(this.src)">
+      <img src="image04.jpeg" alt="4" onclick="openLightbox(this.src)">
+      <img src="image05.jpeg" alt="5" onclick="openLightbox(this.src)">
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <h2>Our Services</h2>
+    <p>We provide Web Design, SEO, Branding, PPC Ads, and more.</p>
+  </section>
+
+  <section class="stats fade-in">
+    <h3 data-target="92">0</h3>
+    <p>Client Retention</p>
+    <h3 data-target="2" data-suffix="+">0</h3>
+    <p>Years of Experience</p>
+    <h3 data-target="35" data-suffix="+">0</h3>
+    <p>Industries Served</p>
+    <h3 data-target="4000" data-suffix="K">0</h3>
+    <p>Satisfied Clients</p>
+  </section>
+
+  <section class="fade-in">
+    <h2>Subscribe for Updates</h2>
+    <form class="subscription-form" onsubmit="subscribe(event)">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <section class="fade-in">
+    <h2>Contact Information</h2>
+    <p>115,V-1 Ranchodray Nagar, Jagatpur, Ahmedabad</p>
+    <p>Phone: <a href="tel:8160348803">8160348803</a></p>
+    <p>Email: <a href="mailto:Linkveda@gmail.com">Linkveda@gmail.com</a></p>
+    <p>Instagram: <a href="https://instagram.com/" target="_blank">LinkVeda_</a></p>
+
+<section class="fade-in" style="text-align:center;">
+  <h2>Connect with us on LinkedIn</h2>
+  <a href="https://www.linkedin.com/company/linkveda/" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:40px; height:40px;">
+  </a>
+</section>
+
+   
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full Size" />
+  </div>
+
+  <!-- Script -->
+  <script>
+    const toggleRightBtn = document.getElementById('toggle-right');
+    const sidebarRight = document.getElementById('sidebar-right');
+    toggleRightBtn.addEventListener('click', () => {
+      sidebarRight.classList.toggle('open');
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const imgs = entry.target.querySelectorAll('img');
+          imgs.forEach((img, i) => {
+            setTimeout(() => img.classList.add('visible'), i * 300);
+          });
+          if (entry.target.classList.contains('stats') && !entry.target.classList.contains('counted')) {
+            entry.target.classList.add('counted');
+            entry.target.querySelectorAll('h3').forEach(el => {
+              const target = parseInt(el.dataset.target);
+              const suffix = el.dataset.suffix || '';
+              animateCount(el, target, 2000, suffix);
+            });
+          }
+        }
+      });
+    });
+    document.querySelectorAll('.fade-in').forEach(sec => observer.observe(sec));
+
+    function animateCount(el, target, duration, suffix = '') {
+      let start = 0;
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.floor(progress * target);
+        el.innerText = suffix === 'K' && value >= 1000 ? `${Math.floor(value / 1000)}K` : value;
+        if (progress < 1) requestAnimationFrame(update);
+        else if (suffix === '+') el.innerText = target + '+';
+      }
+      requestAnimationFrame(update);
+    }
+
+    function subscribe(e) {
+      e.preventDefault();
+      const emailInput = e.target.querySelector('input[type="email"]');
+      alert("Thank you for subscribing! We'll keep you updated.");
+      emailInput.value = '';
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Show welcome popup once per session
+    window.addEventListener('load', () => {
+      if (!sessionStorage.getItem('visited')) {
+        document.getElementById('welcome-popup').style.display = 'block';
+        sessionStorage.setItem('visited', 'true');
+      }
+    });
+  </script>
+
+</body>
+</html>
